@@ -8,6 +8,8 @@ const ART_LINES = [
   "",
   "",
   "",
+  "",
+  "",
   "                          .'    ·    '.      ∗",
   "                         /    ·   ∗✦ ✧  ·   \\",
   "                        /   ·  ✦░░░░░░░░   ·   \\",
@@ -112,7 +114,7 @@ export default function AsciiArt() {
   }, [done]);
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+    <div>
       <pre
         aria-label="ASCII art of Phanes emerging from the cosmic egg"
         style={{
@@ -143,36 +145,6 @@ export default function AsciiArt() {
           </span>
         )}
       </pre>
-
-      <div
-        style={{
-          fontFamily: "var(--font-mono)",
-          borderLeft: "2px solid #6d28d9",
-          paddingLeft: "0.75rem",
-          opacity: done ? 1 : 0,
-          transition: "opacity 1s ease",
-        }}
-      >
-        <p
-          style={{
-            color: "#c4b5fd",
-            fontSize: "0.9rem",
-            letterSpacing: "0.08em",
-            marginBottom: "0.25rem",
-          }}
-        >
-          φάνης — phanes.net
-        </p>
-        <p
-          style={{
-            color: "#64748b",
-            fontSize: "0.72rem",
-            letterSpacing: "0.04em",
-          }}
-        >
-          Primordial god of creation. Born from the cosmic egg.
-        </p>
-      </div>
 
       <style>{`
         @keyframes asciiCursor {

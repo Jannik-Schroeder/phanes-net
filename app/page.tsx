@@ -71,11 +71,14 @@ export default function Home() {
 
               {/* Identity — present but in the background */}
               <div className="identity-block">
-                <span className="identity-name">Jannik Schröder</span>
-                <span className="identity-sep">·</span>
-                <span className="identity-bio">
+                <div className="identity-row">
+                  <span className="identity-name">Jannik Schröder</span>
+                  <span className="identity-sep">·</span>
+                  <span className="identity-site">phanes.net</span>
+                </div>
+                <div className="identity-bio">
                   System Engineer. Privacy, open-source, infrastructure.
-                </span>
+                </div>
               </div>
 
               {/* Contact */}
@@ -132,7 +135,9 @@ export default function Home() {
             grid-template-columns: 1fr 1fr;
           }
           .ascii-column {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: sticky;
             top: 2.5rem;
           }
@@ -178,10 +183,15 @@ export default function Home() {
         /* ─── Identity ───────────────────────────────────────────── */
         .identity-block {
           display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          font-family: var(--font-mono);
+        }
+        .identity-row {
+          display: flex;
           align-items: baseline;
           flex-wrap: wrap;
           gap: 0.5rem;
-          font-family: var(--font-mono);
         }
         .identity-name {
           color: #94a3b8;
@@ -191,6 +201,11 @@ export default function Home() {
         .identity-sep {
           color: #1e293b;
           font-size: 0.78rem;
+        }
+        .identity-site {
+          color: #6d28d9;
+          font-size: 0.78rem;
+          letter-spacing: 0.03em;
         }
         .identity-bio {
           color: #475569;
