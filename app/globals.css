@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #0a0a0f;
+  --color-void-800: #12121a;
+  --color-void-700: #1a1a26;
+  --color-void-600: #22223a;
+  --color-violet-950: #4c1d95;
+  --color-violet-800: #6d28d9;
+  --color-violet-600: #7c3aed;
+  --color-violet-400: #a78bfa;
+  --color-violet-300: #c4b5fd;
+  --color-slate-200: #e2e8f0;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+
+  --font-mono: "Geist Mono", "JetBrains Mono", "Fira Code", "Cascadia Code",
+    ui-monospace, "SFMono-Regular", Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-slate-200);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-violet-950);
+  color: var(--color-violet-300);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-violet-950);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-violet-800);
+}
+
+a {
+  color: var(--color-violet-400);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-violet-300);
+  text-shadow: 0 0 8px rgba(167, 139, 250, 0.4);
+}

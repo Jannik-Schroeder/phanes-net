@@ -1,0 +1,3 @@
+module.exports=[33290,a=>{"use strict";var b=a.i(7997);function c({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{children:a})})}a.s(["default",()=>c,"metadata",0,{title:"phanes.net — Jannik Schröder",description:"Personal project showcase by Jannik Schröder. Building tools for a more private, open web.",keywords:["Jannik Schröder","phanes","privacy","open source","infrastructure"],authors:[{name:"Jannik Schröder",url:"https://phanes.net"}],openGraph:{title:"phanes.net — Jannik Schröder",description:"Building tools for a more private, open web.",url:"https://phanes.net",siteName:"phanes.net",locale:"en_US",type:"website"},robots:{index:!0,follow:!0}}])}];
+
+//# sourceMappingURL=app_layout_tsx_271801d7._.js.map

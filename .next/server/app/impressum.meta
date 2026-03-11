@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/impressum/layout,_N_T_/impressum/page,_N_T_/impressum"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/impressum/__PAGE__",
+    "/impressum",
+    "/_index",
+    "/_head"
+  ]
+}
