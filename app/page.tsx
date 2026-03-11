@@ -124,11 +124,15 @@ export default function Home() {
           gap: 3rem;
           align-items: center;
         }
+        .ascii-column {
+          display: none;
+        }
         @media (min-width: 860px) {
           .page-grid {
             grid-template-columns: 1fr 1fr;
           }
           .ascii-column {
+            display: block;
             position: sticky;
             top: 2.5rem;
           }
