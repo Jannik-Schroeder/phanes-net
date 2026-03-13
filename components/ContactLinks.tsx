@@ -1,8 +1,11 @@
+import Link from "next/link";
+
 interface ContactLink {
   label: string;
   value: string;
   href: string;
   external?: boolean;
+  internal?: boolean;
 }
 
 const links: ContactLink[] = [
@@ -16,7 +19,12 @@ const links: ContactLink[] = [
     label: "Email",
     value: "hello@phanes.net",
     href: "mailto:hello@phanes.net",
-    external: false,
+  },
+  {
+    label: "Blog",
+    value: "phanes.net/blog",
+    href: "/blog",
+    internal: true,
   },
 ];
 
@@ -39,19 +47,32 @@ export default function ContactLinks() {
             {link.label}
           </span>
           <span style={{ color: "#4c1d95", fontSize: "0.75rem" }}>→</span>
-          <a
-            href={link.href}
-            {...(link.external
-              ? { target: "_blank", rel: "noopener noreferrer" }
-              : {})}
-            style={{
-              color: "#a78bfa",
-              fontSize: "0.8125rem",
-              letterSpacing: "0.02em",
-            }}
-          >
-            {link.value}
-          </a>
+          {link.internal ? (
+            <Link
+              href={link.href}
+              style={{
+                color: "#a78bfa",
+                fontSize: "0.8125rem",
+                letterSpacing: "0.02em",
+              }}
+            >
+              {link.value}
+            </Link>
+          ) : (
+            <a
+              href={link.href}
+              {...(link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
+              style={{
+                color: "#a78bfa",
+                fontSize: "0.8125rem",
+                letterSpacing: "0.02em",
+              }}
+            >
+              {link.value}
+            </a>
+          )}
         </div>
       ))}
     </div>

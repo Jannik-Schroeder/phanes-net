@@ -2,46 +2,12 @@ import AsciiArt from "@/components/AsciiArt";
 import ProjectCard from "@/components/ProjectCard";
 import ContactLinks from "@/components/ContactLinks";
 import Link from "next/link";
+import { getSortedProjects } from "@/lib/github";
 
-const projects = [
-  {
-    name: "Solun",
-    subtitle: "solun.pm",
-    description:
-      "Send encrypted text and files — privately. No accounts, no traces, no metadata.",
-    links: [
-      { label: "solun.pm", href: "https://solun.pm", dimPrefix: "→" },
-      {
-        label: "solun-pm/solun",
-        href: "https://github.com/solun-pm/solun",
-        dimPrefix: "gh/",
-      },
-    ],
-  },
-  {
-    name: "jsde.me",
-    subtitle: "jsde.me",
-    description: "Personal site and digital identity hub.",
-    links: [
-      { label: "jsde.me", href: "https://jsde.me", dimPrefix: "→" },
-    ],
-  },
-  {
-    name: "NyxProxy",
-    subtitle: "rotating IPv6 proxy",
-    description:
-      "Open-source rotating IPv6 proxy. Each request exits on a different address. Named after Nyx, goddess of night.",
-    links: [
-      {
-        label: "Jannik-Schroeder/nyxproxy-oss",
-        href: "https://github.com/Jannik-Schroeder/nyxproxy-oss",
-        dimPrefix: "gh/",
-      },
-    ],
-  },
-];
+export const revalidate = 21600;
 
-export default function Home() {
+export default async function Home() {
+  const featured = (await getSortedProjects()).slice(0, 3);
   return (
     <>
       <div className="page-shell">
@@ -62,9 +28,12 @@ export default function Home() {
 
               {/* Projects — main focus */}
               <div className="projects-block">
-                {projects.map((project) => (
-                  <ProjectCard key={project.name} {...project} />
+                {featured.map((project) => (
+                  <ProjectCard key={project.name} {...project} lastUpdated={project.lastUpdated} />
                 ))}
+                <Link href="/projects" className="see-more">
+                  → alle Projekte
+                </Link>
               </div>
 
               <div className="divider" />
@@ -171,6 +140,18 @@ export default function Home() {
         }
         .project-card a:hover {
           color: #c4b5fd !important;
+        }
+        .see-more {
+          color: #334155 !important;
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          letter-spacing: 0.05em;
+          text-shadow: none !important;
+          transition: color 0.15s;
+          align-self: flex-start;
+        }
+        .see-more:hover {
+          color: #6d28d9 !important;
         }
 
         /* ─── Divider ────────────────────────────────────────────── */

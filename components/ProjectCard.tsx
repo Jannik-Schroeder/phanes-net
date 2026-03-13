@@ -9,6 +9,7 @@ interface ProjectCardProps {
   subtitle?: string;
   description: string;
   links: ProjectLink[];
+  lastUpdated?: string | null;
 }
 
 export default function ProjectCard({
@@ -16,6 +17,7 @@ export default function ProjectCard({
   subtitle,
   description,
   links,
+  lastUpdated,
 }: ProjectCardProps) {
   return (
     <article
@@ -65,7 +67,8 @@ export default function ProjectCard({
         {description}
       </p>
 
-      <div style={{ display: "flex", flexWrap: "wrap", gap: "0 1.25rem" }}>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: "0 1.25rem", alignItems: "baseline", justifyContent: "space-between" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0 1.25rem" }}>
         {links.map((link) => (
           <span key={link.href} style={{ display: "inline-flex", alignItems: "baseline", gap: "0.2rem" }}>
             {link.dimPrefix && (
@@ -96,6 +99,12 @@ export default function ProjectCard({
             </a>
           </span>
         ))}
+        </div>
+        {lastUpdated && (
+          <span style={{ color: "#1e293b", fontSize: "0.68rem", fontFamily: "var(--font-mono)", letterSpacing: "0.03em", whiteSpace: "nowrap" }}>
+            {lastUpdated}
+          </span>
+        )}
       </div>
     </article>
   );
