@@ -1,3 +1,10 @@
+export interface Contribution {
+  name: string;
+  description: string;
+  href: string;
+  repo: string; // "owner/repo" displayed as label
+}
+
 export interface ProjectLink {
   label: string;
   href: string;
@@ -64,16 +71,62 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "sequencessh",
+    name: "sequencessh",
+    subtitle: "multi-server SSH",
+    description: "CLI tool to run a command on multiple SSH servers simultaneously from a single line.",
+    details:
+      "sqssh reads named server lists from ~/.config/sqssh/config and fans out a single command to every host in the list via SSH, displaying each server's output in sequence. Useful for fleet management, batch deployments, or any situation where you need the same command to run across a group of servers without reaching for a full orchestration tool.",
+    githubRepo: "Jannik-Schroeder/sequencessh",
+    links: [
+      { label: "Jannik-Schroeder/sequencessh", href: "https://github.com/Jannik-Schroeder/sequencessh", dimPrefix: "gh/" },
+    ],
+  },
+  {
+    slug: "win11-tsl12-enable",
+    name: "win11-tsl12-enable",
+    subtitle: "Raspberry Pi Pico",
+    description: "Pico-based HID automation to apply the TLS 1.2 registry fix required for Uni-Paderborn certificates on Windows 11.",
+    details:
+      "Built during my apprenticeship as a helper tool for a former employer. A Raspberry Pi Pico running CircuitPython acts as a USB HID keyboard and executes a Ducky Script payload that applies the Windows registry entry needed to enable TLS 1.2 for Uni-Paderborn user certificates. Plug in, wait half a second, done — no manual steps. A GPIO jumper puts the device into setup mode so you can edit the payload without it triggering on your own machine.",
+    githubRepo: "Jannik-Schroeder/win11-tsl12-enable",
+    links: [
+      { label: "Jannik-Schroeder/win11-tsl12-enable", href: "https://github.com/Jannik-Schroeder/win11-tsl12-enable", dimPrefix: "gh/" },
+    ],
+  },
+  {
+    slug: "workflows",
+    name: "Workflows",
+    subtitle: "reusable CI/CD",
+    description: "Shared GitHub Actions workflows — one source of truth for CI/CD across all projects.",
+    details:
+      "A centralised collection of reusable GitHub Actions workflows. Instead of duplicating pipeline logic across every repo, projects call these workflows directly. Changes propagate everywhere at once, keeping CI/CD consistent and easy to maintain.",
+    githubRepo: "Jannik-Schroeder/workflows",
+    links: [
+      { label: "Jannik-Schroeder/workflows", href: "https://github.com/Jannik-Schroeder/workflows", dimPrefix: "gh/" },
+    ],
+  },
+  {
     slug: "phanes-net",
     name: "phanes.net",
     subtitle: "this site",
-    description: "Personal project showcase. Zero client-side JS, fully static, monospace purple.",
+    description: "Personal project showcase. Minimal client-side JS, fully static, monospace purple.",
     details:
-      "The site you're looking at. Built with Next.js 16 App Router, React Server Components, and Tailwind CSS v4. Zero client-side JavaScript except for the ASCII art animation. Fully static output — no database, no CMS, no tracking. Blog powered by MDX files in the repo. Projects sorted by last GitHub commit via the GitHub API with 6-hour ISR revalidation.",
+      "The site you're looking at. Built with Next.js 16 App Router, React Server Components, and Tailwind CSS v4. Client-side JavaScript is limited to two animation components — the ASCII art typewriter on the home page and the twinkling star effect on the blog. Everything else is statically rendered: no database, no CMS, no tracking. Blog powered by MDX files in the repo. Projects sorted by last GitHub commit via the GitHub API with 6-hour ISR revalidation.",
     githubRepo: "Jannik-Schroeder/phanes-net",
     links: [
       { label: "phanes.net", href: "https://phanes.net", dimPrefix: "→" },
       { label: "Jannik-Schroeder/phanes-net", href: "https://github.com/Jannik-Schroeder/phanes-net", dimPrefix: "gh/" },
     ],
+  },
+];
+
+// Alphabetically sorted by name — add entries here as needed
+export const contributions: Contribution[] = [
+  {
+    name: "Plunk",
+    description: "Open-source email platform on AWS SES — transactional emails, campaigns, workflows, and analytics.",
+    href: "https://github.com/useplunk/plunk",
+    repo: "useplunk/plunk",
   },
 ];

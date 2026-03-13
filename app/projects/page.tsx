@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getSortedProjects } from "@/lib/github";
+import { contributions } from "@/lib/projects";
 import type { Metadata } from "next";
 
 export const revalidate = 21600;
@@ -62,6 +63,38 @@ export default async function ProjectsPage() {
               </details>
             ))}
           </main>
+
+          {contributions.length > 0 && (
+            <>
+              <div className="contrib-divider" />
+              <section className="contrib-section">
+                <h2 className="contrib-heading">Contributions</h2>
+                <div className="contrib-list">
+                  {[...contributions]
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((c) => (
+                      <details key={c.repo} className="contrib-item">
+                        <summary className="contrib-summary">
+                          <span className="contrib-marker">▶</span>
+                          <span className="contrib-name">{c.name}</span>
+                          <span className="contrib-repo">{c.repo}</span>
+                          <span className="contrib-short">{c.description}</span>
+                        </summary>
+                        <div className="contrib-body">
+                          <p className="contrib-desc">{c.description}</p>
+                          <span style={{ display: "inline-flex", alignItems: "baseline", gap: "0.2rem" }}>
+                            <span className="proj-link-prefix">gh/</span>
+                            <a href={c.href} target="_blank" rel="noopener noreferrer" className="contrib-link">
+                              {c.repo}
+                            </a>
+                          </span>
+                        </div>
+                      </details>
+                    ))}
+                </div>
+              </section>
+            </>
+          )}
         </div>
 
         <footer className="page-footer">
@@ -224,6 +257,123 @@ export default async function ProjectsPage() {
           font-family: var(--font-mono);
           letter-spacing: 0.03em;
           white-space: nowrap;
+        }
+
+        /* ─── Contributions ───────────────────────────────────── */
+        .contrib-divider {
+          height: 1px;
+          background: #13131e;
+          width: 100%;
+        }
+        .contrib-section {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .contrib-heading {
+          color: #334155;
+          font-size: 0.68rem;
+          font-family: var(--font-mono);
+          font-weight: 400;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          margin: 0;
+        }
+        .contrib-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          border-left: 1px solid #13131e;
+        }
+        .contrib-item {
+          border-left: 1px solid transparent;
+          margin-left: -1px;
+          transition: border-color 0.15s;
+        }
+        .contrib-item[open] {
+          border-left-color: #1e1b2e;
+        }
+        .contrib-item + .contrib-item {
+          border-top: 1px solid #0d0d16;
+        }
+        .contrib-summary {
+          list-style: none;
+          display: grid;
+          grid-template-columns: 0.9rem auto auto 1fr;
+          align-items: baseline;
+          gap: 0.55rem;
+          padding: 0.75rem 1rem;
+          cursor: pointer;
+          user-select: none;
+          transition: background 0.12s;
+        }
+        .contrib-summary::-webkit-details-marker { display: none; }
+        .contrib-summary::marker { display: none; }
+        .contrib-summary:hover { background: #0a0a11; }
+        .contrib-marker {
+          color: #1e293b;
+          font-size: 0.55rem;
+          transition: transform 0.18s, color 0.15s;
+          display: inline-block;
+          line-height: 1;
+          align-self: center;
+        }
+        .contrib-item[open] .contrib-marker {
+          transform: rotate(90deg);
+          color: #334155;
+        }
+        .contrib-name {
+          color: #64748b;
+          font-size: 0.82rem;
+          font-family: var(--font-mono);
+          font-weight: 600;
+          letter-spacing: 0.03em;
+          white-space: nowrap;
+        }
+        .contrib-summary:hover .contrib-name { color: #94a3b8; }
+        .contrib-repo {
+          color: #1e293b;
+          font-size: 0.72rem;
+          font-family: var(--font-mono);
+          white-space: nowrap;
+        }
+        .contrib-short {
+          color: #334155;
+          font-size: 0.76rem;
+          font-family: var(--font-mono);
+          letter-spacing: 0.01em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+        .contrib-body {
+          padding: 0 1rem 0.85rem 2.45rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.6rem;
+        }
+        .contrib-desc {
+          color: #475569;
+          font-size: 0.79rem;
+          font-family: var(--font-mono);
+          line-height: 1.7;
+          letter-spacing: 0.01em;
+          margin: 0;
+        }
+        .contrib-link {
+          color: #4c1d95 !important;
+          font-size: 0.75rem;
+          font-family: var(--font-mono);
+          text-shadow: none !important;
+          transition: color 0.15s;
+        }
+        .contrib-link:hover { color: #7c3aed !important; }
+        @media (max-width: 600px) {
+          .contrib-summary {
+            grid-template-columns: 0.9rem auto 1fr;
+          }
+          .contrib-repo { display: none; }
+          .contrib-short { white-space: normal; }
         }
         .proj-link-wrap {
           display: inline-flex;

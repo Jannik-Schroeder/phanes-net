@@ -3,24 +3,32 @@ title: "Hello, World"
 date: "2026-03-13"
 ---
 
-The first post on this blog. Sometimes writing feels harder than shipping code —
-so let this be proof that the pipeline works.
+First post. The pipeline works, which is already more than I expected on the first try.
 
-## Why a blog?
+## What's this about
 
-I spend a lot of time thinking about privacy, open infrastructure, and systems
-design. Notes pile up in text files. This is just a cleaner place for them.
+Updates on stuff I'm working on — Solun, NyxProxy, contributions like Plunk,
+and whatever else ends up in my GitHub. Not a formal changelog, more like
+"here's what changed, here's what broke, here's what I learned from it."
 
-## What to expect
+So when I ship something, refactor something badly, or spend three hours
+debugging something embarrassingly simple, that's probably going to end up here.
 
-- Short technical write-ups
-- Opinions on the open web
-- The occasional rant about DNS
-
-Code will appear when necessary:
+## The vibe
 
 ```bash
-curl -s https://phanes.net
+# what I thought the bug was
+curl -X POST /api/send -d '{"to": "me@example.com"}'
+# > 200 OK
+
+# what the bug actually was
+cat /var/log/app.log | grep ERROR
+# > missing env var since tuesday
 ```
 
-Nothing fancy. Just words and the occasional snippet.
+Loose. Code when it helps. No pressure to be exhaustive.
+
+## Also
+
+Infrastructure, privacy, open-source tooling — the usual. If something
+interesting crosses my terminal it'll probably show up here too.
