@@ -100,9 +100,9 @@ export default async function ProjectsPage() {
         <footer className="page-footer">
           <span className="footer-text">phanes.net</span>
           <span className="footer-dot">·</span>
-          <Link href="/impressum" className="footer-link">Legal Notice</Link>
+          <Link href="/legal" className="footer-link">Legal Notice</Link>
           <span className="footer-dot">·</span>
-          <Link href="/datenschutz" className="footer-link">Privacy Policy</Link>
+          <Link href="/privacy" className="footer-link">Privacy Policy</Link>
           <span className="footer-spacer" />
           <a href="https://status.phanes.net" className="footer-link footer-status">Status</a>
         </footer>
