@@ -61,11 +61,11 @@ export const projects: Project[] = [
       "High-performance Go proxy that assigns a fresh IPv6 address to every request from your own /64 subnet.",
     details:
       "Every hosting provider that gives you a /64 IPv6 subnet hands you 18 quintillion addresses. NyxProxy puts them to work: a pre-populated pool of 200 IPs is kept ready, each replaced after 100 uses or 30 minutes. The result is a different exit IP per request with no coordination overhead. Single-IP proxies get rate-limited, fingerprinted, and blocked. NyxProxy makes each request look like a different user. Written in Go, MIT-licensed, ships with a one-command Debian/Ubuntu installer and a systemd unit. Typical use cases: web scraping without rate limits, multi-user API testing, and privacy-conscious browsing.",
-    githubRepo: "Jannik-Schroeder/nyxproxy-oss",
+    githubRepo: "phanes-io/nyxproxy-oss",
     links: [
       {
-        label: "Jannik-Schroeder/nyxproxy-oss",
-        href: "https://github.com/Jannik-Schroeder/nyxproxy-oss",
+        label: "phanes-io/nyxproxy-oss",
+        href: "https://github.com/phanes-io/nyxproxy-oss",
         dimPrefix: "gh/",
       },
     ],
@@ -113,10 +113,10 @@ export const projects: Project[] = [
     description: "Personal project showcase. Minimal client-side JS, fully static, monospace purple.",
     details:
       "The site you're looking at. Built with Next.js 16 App Router, React Server Components, and Tailwind CSS v4. Client-side JavaScript is limited to two animation components — the ASCII art typewriter on the home page and the twinkling star effect on the blog. Everything else is statically rendered: no database, no CMS, no tracking. Blog powered by MDX files in the repo. Projects sorted by last GitHub commit via the GitHub API with 6-hour ISR revalidation.",
-    githubRepo: "Jannik-Schroeder/phanes-net",
+    githubRepo: "phanes-io/phanes-net",
     links: [
       { label: "phanes.net", href: "https://phanes.net", dimPrefix: "→" },
-      { label: "Jannik-Schroeder/phanes-net", href: "https://github.com/Jannik-Schroeder/phanes-net", dimPrefix: "gh/" },
+      { label: "phanes-io/phanes-net", href: "https://github.com/phanes-io/phanes-net", dimPrefix: "gh/" },
     ],
   },
 ];
