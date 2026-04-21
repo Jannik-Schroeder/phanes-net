@@ -107,6 +107,57 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "peakmoto",
+    name: "PeakMoto",
+    subtitle: "motorcycle nav",
+    description:
+      "Free & open-source motorcycle navigation app — curvy road routing, offline maps, no tracking.",
+    details:
+      "PeakMoto is a privacy-first motorcycle navigation app built with Flutter. It uses OpenStreetMap for map rendering and BRouter for motorcycle-optimised routing with adjustable curvy-road intensity. Turn-by-turn voice guidance, offline maps, and GPX import/export are built in. All compute-heavy work — routing, rendering, GPX processing — runs on-device; there is no account, no tracking, and no subscription. Touch targets are sized for gloved operation and the dark theme is designed for outdoor readability. Licensed under AGPL-3.0.",
+    githubRepo: "phanes-io/peakmoto",
+    links: [
+      {
+        label: "phanes-io/peakmoto",
+        href: "https://github.com/phanes-io/peakmoto",
+        dimPrefix: "gh/",
+      },
+    ],
+  },
+  {
+    slug: "commitgen-nvim",
+    name: "commitgen.nvim",
+    subtitle: "Neovim plugin",
+    description:
+      "Neovim plugin that generates conventional commit messages from staged changes via OpenAI.",
+    details:
+      "commitgen.nvim reads your staged diff (git diff --cached) and sends it to OpenAI's chat completions API to generate a conventional commit message. The result appears in an editable floating window inside Neovim — press Enter to commit, Esc to cancel. The entire flow runs asynchronously via vim.fn.jobstart so Neovim never blocks. Supports model selection, language preference, auto-staging, and SSH commit signing with FIDO hardware keys. Built for lazy.nvim, written in pure Lua, MIT-licensed.",
+    githubRepo: "Jannik-Schroeder/commitgen.nvim",
+    links: [
+      {
+        label: "Jannik-Schroeder/commitgen.nvim",
+        href: "https://github.com/Jannik-Schroeder/commitgen.nvim",
+        dimPrefix: "gh/",
+      },
+    ],
+  },
+  {
+    slug: "omarchy-kurenai-theme",
+    name: "omarchy-kurenai-theme",
+    subtitle: "color scheme",
+    description:
+      "Deep crimson color scheme for the Omarchy platform — Neovim, VS Code, Zed, btop, Hyprland, and more.",
+    details:
+      "A cohesive dark color scheme built around deep crimson and warm amber tones, inspired by Japanese aesthetics. Ships with configurations for Neovim, VS Code, Zed, btop, Obsidian, Hyprland, and Waybar. Colors are managed via a central TOML palette and meet WCAG AA contrast requirements. Includes five matching wallpapers.",
+    githubRepo: "Jannik-Schroeder/omarchy-kurenai-theme",
+    links: [
+      {
+        label: "Jannik-Schroeder/omarchy-kurenai-theme",
+        href: "https://github.com/Jannik-Schroeder/omarchy-kurenai-theme",
+        dimPrefix: "gh/",
+      },
+    ],
+  },
+  {
     slug: "phanes-net",
     name: "phanes.net",
     subtitle: "this site",

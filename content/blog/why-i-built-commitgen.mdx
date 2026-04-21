@@ -1,0 +1,54 @@
+---
+title: "Why I Built commitgen.nvim"
+date: "2026-04-21"
+---
+
+I use lazygit for everything. Staging, rebasing, force-pushing things I probably shouldn't — the whole flow lives in the terminal. But there's one part of the git workflow I've always been bad at: writing commit messages.
+
+Not because I don't care, but because I forget. You refactor three files, fix a type import, rename a variable, and adjust an edge case — and by the time you're staging, the first change is already half out of your memory. The result is either a vague `fix stuff` or a five-minute archaeology session through `git diff --cached` trying to reconstruct what you actually did.
+
+So I built [commitgen.nvim](https://github.com/Jannik-Schroeder/commitgen.nvim) — a small Neovim plugin that generates conventional commit messages from your staged changes using OpenAI.
+
+## How it works
+
+The flow is three steps:
+
+1. **Read the diff.** The plugin runs `git diff --cached --stat` and `git diff --cached` to capture exactly what's staged. If nothing is staged (and auto-staging is off), it bails early.
+
+2. **Ask OpenAI.** The diff and git status are sent to OpenAI's chat completions endpoint (`gpt-4o-mini` by default). The prompt enforces conventional commit format — a type prefix (`feat`, `fix`, `refactor`, `chore`, etc.), a summary line capped at 72 characters, and bullet points for individual changes. Temperature is set to 0.3 to keep output deterministic.
+
+3. **Review and commit.** The generated message appears in an editable floating window (80 chars wide, centered in the editor). You can tweak it, then press Enter to confirm or Esc/q to cancel. On confirm, the message is written to a temp file and committed via `git commit -F`.
+
+The entire thing runs asynchronously using `vim.fn.jobstart`, so Neovim never freezes while waiting for the API response.
+
+```lua
+-- lazy.nvim setup
+{
+  "jannik-schroeder/commitgen.nvim",
+  config = function()
+    require("commitgen").setup({
+      model = "gpt-4o-mini",
+      language = "en",
+    })
+    vim.keymap.set("n", "<leader>gc", require("commitgen").generate)
+  end,
+}
+```
+
+## The prompt
+
+The system prompt tells the model to act strictly as a commit message generator — no explanations, no markdown fences, just the message. The user prompt includes formatting rules, the allowed commit types (`feat`, `fix`, `refactor`, `add`, `delete`, `update`, `docs`, `style`, `test`, `chore`, `perf`), and the raw diff. This keeps the output consistent across different models and diff sizes.
+
+## Why not just use a CLI tool?
+
+Because I live in Neovim and lazygit. I don't want to leave the editor, run a separate command, copy the output, and paste it back. With commitgen, the keybind fires, the message appears in a float, I hit Enter, done. It fits into the flow I already have instead of adding a new one.
+
+## SSH signing and FIDO keys
+
+One thing that was slightly annoying to get right: commit signing with SSH keys on FIDO hardware tokens (like a YubiKey). Git needs `SSH_ASKPASS` set to handle the PIN prompt in non-interactive contexts. The plugin supports this — if you sign commits with a hardware key, it works without breaking the async flow.
+
+## What it doesn't do
+
+It doesn't write perfect messages. Sometimes it's too verbose, sometimes it misses the intent behind a change. But it gets you 80-90% of the way there, and editing a decent draft is significantly faster than writing from scratch — especially when you've been heads-down in code and the context has already left your brain.
+
+That's the whole point. Not automation, just a shortcut past the blank line.
