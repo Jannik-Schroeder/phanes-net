@@ -1,0 +1,56 @@
+when:
+  - event: push
+    branch: [main, master]
+  - event: manual
+
+steps:
+  # Version aus package.json -> Tags <version> und latest
+  - name: tags
+    image: registry.local.phanes.net/dockerhub/library/node:20-alpine
+    commands:
+      - VERSION=$(node -p "require('./package.json').version")
+      - printf '%s\nlatest\n' "$VERSION" > .tags
+      - echo "Tags fuer diesen Build:" && cat .tags
+
+  # Kein "privileged: true": der Server erlaubt dieses Plugin-Image ueber
+  # WOODPECKER_PLUGINS_PRIVILEGED (exakter Tag-Match).
+  - name: build-push
+    image: woodpeckerci/plugin-docker-buildx:6.1.1
+    settings:
+      registry: registry.local.phanes.net
+      repo: registry.local.phanes.net/phanes-io/phanes-net
+      dockerfile: Dockerfile
+      platforms: linux/amd64
+      tags_file: .tags
+      username:
+        from_secret: harbor_user
+      password:
+        from_secret: harbor_token
+    depends_on: [tags]
+
+  # Neuen Tag in infra-stacks eintragen; der Push dort loest den Forgejo-Webhook
+  # aus, woraufhin Komodo den Stack neu ausrollt.
+  - name: deploy-tag
+    image: registry.local.phanes.net/dockerhub/alpine/git:latest
+    environment:
+      FORGEJO_USER:
+        from_secret: forgejo_user
+      FORGEJO_TOKEN:
+        from_secret: forgejo_token
+    commands:
+      - VERSION=$(head -1 .tags)
+      - git clone -q "https://$FORGEJO_USER:$FORGEJO_TOKEN@git.local.phanes.net/phanes-io/infra-stacks.git" /tmp/infra
+      - cd /tmp/infra
+      # Muster ohne "image: " - ein Doppelpunkt mit Leerzeichen wuerde die YAML-Zeile brechen
+      - sed -i "s#phanes-io/phanes-net:[A-Za-z0-9._-]*#phanes-io/phanes-net:$VERSION#" apps01/phanes-net/docker-compose.yml
+      - git config user.email "ci-bot@phanes.net"
+      - git config user.name "CI Bot"
+      - |
+        if git diff --quiet; then
+          echo "Tag unveraendert ($VERSION) - kein Commit noetig"
+        else
+          git commit -am "phanes-net: Image-Tag auf $VERSION (Pipeline $CI_PIPELINE_NUMBER)"
+          git push origin main
+          echo "Tag $VERSION nach infra-stacks gepusht"
+        fi
+    depends_on: [build-push]
