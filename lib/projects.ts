@@ -61,11 +61,11 @@ export const projects: Project[] = [
       "High-performance Go proxy that assigns a fresh IPv6 address to every request from your own /64 subnet.",
     details:
       "Every hosting provider that gives you a /64 IPv6 subnet hands you 18 quintillion addresses. NyxProxy puts them to work: a pre-populated pool of 200 IPs is kept ready, each replaced after 100 uses or 30 minutes. The result is a different exit IP per request with no coordination overhead. Single-IP proxies get rate-limited, fingerprinted, and blocked. NyxProxy makes each request look like a different user. Written in Go, MIT-licensed, ships with a one-command Debian/Ubuntu installer and a systemd unit. Typical use cases: web scraping without rate limits, multi-user API testing, and privacy-conscious browsing.",
-    githubRepo: "phanes-io/nyxproxy-oss",
+    githubRepo: "Jannik-Schroeder/nyxproxy-oss",
     links: [
       {
-        label: "phanes-io/nyxproxy-oss",
-        href: "https://github.com/phanes-io/nyxproxy-oss",
+        label: "Jannik-Schroeder/nyxproxy-oss",
+        href: "https://github.com/Jannik-Schroeder/nyxproxy-oss",
         dimPrefix: "gh/",
       },
     ],
@@ -114,11 +114,11 @@ export const projects: Project[] = [
       "Free & open-source motorcycle navigation app — curvy road routing, offline maps, no tracking.",
     details:
       "PeakMoto is a privacy-first motorcycle navigation app built with Flutter. It uses OpenStreetMap for map rendering and BRouter for motorcycle-optimised routing with adjustable curvy-road intensity. Turn-by-turn voice guidance, offline maps, and GPX import/export are built in. All compute-heavy work — routing, rendering, GPX processing — runs on-device; there is no account, no tracking, and no subscription. Touch targets are sized for gloved operation and the dark theme is designed for outdoor readability. Licensed under AGPL-3.0.",
-    githubRepo: "phanes-io/peakmoto",
+    githubRepo: "Jannik-Schroeder/peakmoto",
     links: [
       {
-        label: "phanes-io/peakmoto",
-        href: "https://github.com/phanes-io/peakmoto",
+        label: "Jannik-Schroeder/peakmoto",
+        href: "https://github.com/Jannik-Schroeder/peakmoto",
         dimPrefix: "gh/",
       },
     ],
@@ -165,10 +165,10 @@ export const projects: Project[] = [
     description: "Personal project showcase. Minimal client-side JS, fully static, monospace purple.",
     details:
       "The site you're looking at. Built with Next.js 16 App Router, React Server Components, and Tailwind CSS v4. Client-side JavaScript is limited to two animation components — the ASCII art typewriter on the home page and the twinkling star effect on the blog. Everything else is statically rendered: no database, no CMS, no tracking. Blog powered by MDX files in the repo. Projects sorted by last GitHub commit via the GitHub API with 6-hour ISR revalidation.",
-    githubRepo: "phanes-io/phanes-net",
+    githubRepo: "Jannik-Schroeder/phanes-net",
     links: [
       { label: "phanes.net", href: "https://phanes.net", dimPrefix: "→" },
-      { label: "phanes-io/phanes-net", href: "https://github.com/phanes-io/phanes-net", dimPrefix: "gh/" },
+      { label: "Jannik-Schroeder/phanes-net", href: "https://github.com/Jannik-Schroeder/phanes-net", dimPrefix: "gh/" },
     ],
   },
 ];
