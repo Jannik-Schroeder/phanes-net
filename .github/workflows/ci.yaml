@@ -1,16 +1,51 @@
-name: Create and Publish a Docker Image
-
-on:
+name: Build and publish the website
+'on':
   push:
     branches:
-      - main
-      - master
+    - master
+  pull_request:
+    branches:
+    - master
   workflow_dispatch:
-
+    inputs:
+      publish:
+        description: Publish this source build to the public GHCR package
+        type: boolean
+        default: false
+concurrency:
+  group: website-${{ github.ref }}
+  cancel-in-progress: false
 jobs:
-  call-docker-build:
+  check:
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 2
+        persist-credentials: false
+    - uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+        cache: npm
+    - name: Run publication checks
+      run: 'npm ci --no-fund
+
+        npm audit --audit-level=high
+
+        npm run test:publication
+
+        npm run build'
+    - name: Scan this commit
+      run: docker run --rm -v "$GITHUB_WORKSPACE:/src:ro" ghcr.io/gitleaks/gitleaks:v8.30.1 git /src --log-opts=-1 --redact --no-banner
+  publish:
     uses: Jannik-Schroeder/workflows/.github/workflows/docker-build-node.yaml@main
     permissions:
       contents: write
       packages: write
       id-token: write
+    needs: check
+    if: ${{ github.ref_name == github.event.repository.default_branch && (github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && inputs.publish)) }}
